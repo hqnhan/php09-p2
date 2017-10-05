@@ -2,7 +2,7 @@
 	$n = 120;
 	// question 1.
 	for ($i = 0; $i <= $n ; $i++) {
-		if(($i % 3) == 0){
+		if (($i % 3) == 0) {
 			echo $i.", ";
 		} 
 	}
@@ -13,8 +13,8 @@
 	}
 
 	// question 3.
-	do{
+	do {
 		echo "<br>".$n ;
 		break;
-	}while ( $n > 15 );
+	} while ($n > 15);
 ?>
