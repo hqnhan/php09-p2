@@ -82,7 +82,7 @@ function test_input($data) {
     echo "New record created successfully";
   }
   else{
-    echo "Erro:".$sql."<br>".mysqli_query($conn);
+    echo "Erro:".$sql."<br>".mysqli_query($conn,$sql);
   }
 
 
