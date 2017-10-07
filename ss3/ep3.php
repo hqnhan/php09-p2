@@ -1,10 +1,24 @@
 <?php
+  $servername = "localhost";
+  $username = "root";
+  $password = "";
+  $database = "shop_php09";
+  $conn = mysqli_connect($servername, $username, $password,$database);
+      // Check connection
+  if (!$conn) {
+      die("Connection failed: " . mysqli_connect_error());
+  }
+
+  /*
+  *
+  */
+  //$name = $_POST["name"];
 	$nameErr = $classErr = $birtdayErr = $emailErr = "";
 	if ($_SERVER["REQUEST_METHOD"] == "POST") {
   		if (empty($_POST["name"])) {
     		$nameErr = "Name is required";
   		} else {
-    		$name = test_input($_POST["name"]);
+    		  $name = test_input($_POST["name"]); 
   		}
   		if (empty($_POST["class"])) {
     		$classErr = "Class is required";
@@ -48,8 +62,42 @@ function test_input($data) {
 	
 </form>
 <?php
-	echo $_POST['name']."<br>";
-	echo $_POST['class']."<br>";
-	echo $_POST['birtday']."<br>";
-	echo $_POST['email']."<br>";
+
+	$name1 = (isset($_POST['name']) ? $_POST['name'] : '');
+	$class1 = (isset($_POST['class']) ? $_POST['class'] : '');
+	$birtday1 = (isset($_POST['birtday']) ? $_POST['birtday'] : '');
+	$email1 = (isset($_POST['email']) ? $_POST['email'] : '');
+  echo $name1."<br>";
+  echo $class1."<br>";
+  echo $birtday1."<br>";
+  echo $email1."<br>";
+
+
+  $sql = "INSERT INTO users (name, class, age, email)
+      VALUES ('$name1', '$class1', $birtday1, '$email1') ";
+
+  
+
+  if (mysqli_query($conn, $sql)){
+    echo "New record created successfully";
+  }
+  else{
+    echo "Erro:".$sql."<br>".mysqli_query($conn);
+  }
+
+
+
+
+  $mysql = "SELECT * FROM users";
+  $result = $conn->query($mysql);
+
+if ($result->num_rows > 0) {
+    // output data of each row
+    while($row = $result->fetch_assoc()) {
+        echo "id: " . $row["id"]. " - Name: " . $row["name"]. " " ."class:". $row["class"]. " " ."age:".$row["age"]. " " ."email:".$row["email"] ."<br>";
+    }
+} else {
+    echo "0 results";
+}
+$conn->close();
 ?>
