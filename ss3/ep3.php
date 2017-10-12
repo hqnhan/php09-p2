@@ -72,17 +72,14 @@ function test_input($data) {
   echo $birtday1."<br>";
   echo $email1."<br>";
 
-
-  $sql = "INSERT INTO users (name, class, age, email)
+  if ($nameErr == "" || $classErr == "" || $birtdayErr == "" || $emailErr == "") {
+      $sql = "INSERT INTO users (name, class, age, email)
       VALUES ('$name1', '$class1', $birtday1, '$email1') ";
-
-  
-
-  if (mysqli_query($conn, $sql)){
-    echo "New record created successfully";
-  }
-  else{
-    echo "Erro:".$sql."<br>".mysqli_query($conn,$sql);
+      if (mysqli_query($conn, $sql)){
+        echo "New record created successfully";
+      } else {
+          echo "Erro:".$sql."<br>".mysqli_query($conn,$sql);
+      }
   }
 
 
